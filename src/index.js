@@ -39,4 +39,4 @@ const run = async () => {
 
 setInterval(() => {
   run();
-}, 10000);
+}, 1000 * 60);
