@@ -1,5 +1,6 @@
 const axios = require('axios');
-const INTERESTED_STOCKS = require('./config.json');
+const { makeEmailAndSend } = require('./email');
+const INTERESTED_STOCKS = require('./interested-stocks-config.json');
 
 const BASE_URL = 'https://api.gucheng.com/lg/zg/base.php';
 
@@ -31,7 +32,11 @@ const checkStocksPrice = (stockInfos, interestedStocks) => {
 const run = async () => {
   const stockInfos = await getStocks(INTERESTED_STOCKS);
   const keyStocks = checkStocksPrice(stockInfos, INTERESTED_STOCKS);
-  console.log('keyStocks', keyStocks);
+  if (keyStocks.length) {
+    makeEmailAndSend(keyStocks);
+  }
 };
 
-run();
+setInterval(() => {
+  run();
+}, 10000);

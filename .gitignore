@@ -27,3 +27,5 @@ yarn-error.log*
 tmp
 src/locales/output
 trans-tmp
+
+email-config.json
