@@ -29,8 +29,15 @@ const checkStocksPrice = (stockInfos, interestedStocks) => {
   return keyStocks;
 };
 
+const logStockInfo = (stockInfos) => {
+  stockInfos.forEach(({ data }) => {
+    console.log('stockInfos', data);
+  });
+};
+
 const run = async () => {
   const stockInfos = await getStocks(INTERESTED_STOCKS);
+  logStockInfo(stockInfos);
   const keyStocks = checkStocksPrice(stockInfos, INTERESTED_STOCKS);
   if (keyStocks.length) {
     makeEmailAndSend(keyStocks);
