@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { makeEmailAndSend } = require('./email');
+const { pollTask } = require('./schedule');
 const INTERESTED_STOCKS = require('./interested-stocks-config.json');
 
 const BASE_URL = 'https://api.gucheng.com/lg/zg/base.php';
@@ -44,6 +45,4 @@ const run = async () => {
   }
 };
 
-setInterval(() => {
-  run();
-}, 1000 * 60);
+pollTask(run);
