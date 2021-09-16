@@ -22,8 +22,10 @@ const checkStocksPrice = (stockInfos, interestedStocks) => {
   stockInfos.forEach(({ data }, index) => {
     const { stockInfo } = data.data;
     const currentPrice = stockInfo.now;
-    const { targetPrice } = interestedStocks[index];
-    if (currentPrice <= targetPrice) {
+    const {
+      targetPriceThresholds: [min, max],
+    } = interestedStocks[index];
+    if (currentPrice <= min || currentPrice >= max) {
       keyStocks.push(data.data);
     }
   });
